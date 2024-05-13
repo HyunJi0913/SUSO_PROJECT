@@ -1,20 +1,40 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" lang="">
-<div layout:fragment="content" class="container my-3">
-    <form th:action="@{/login}" method="post">
-        <div th:if="${param.error}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/suso/src/css/loginstyle.css">
+</head>
+<body>
+<div layout:fragment="content" class="login-container">
+    <div class="cloud-icon">
+        <img src="/suso/src/css/cloud.png" alt="Cloud Icon"> <!-- 경로 수정 -->    </div>
+    <div class="title">
+        수화로 소통하는 수소
+    </div>
+    <form th:action="@{/login}" method="post" class="login-form">
+        <div th:if="${param.error}" class="form-group">
             <div class="alert alert-danger">
                 사용자ID 또는 비밀번호를 확인해 주세요.
             </div>
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             <label for="username" class="form-label">사용자ID</label>
-            <input type="text" name="username" id="username" class="form-control">
+            <input type="text" id="username" name="username" class="form-control" placeholder="아이디를 입력하세요" required>
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             <label for="password" class="form-label">비밀번호</label>
-            <input type="password" name="password" id="password" class="form-control">
+            <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" required>
         </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
+        <div class="form-group">
+            <button type="submit" class="login-button">로그인</button>
+        </div>
+        <div class="links">
+            <a href="#">회원가입</a>
+            <a href="#">아이디/비밀번호 찾기</a>
+        </div>
     </form>
 </div>
+</body>
+
 </html>
