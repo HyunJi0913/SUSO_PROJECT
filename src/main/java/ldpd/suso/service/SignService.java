@@ -1,6 +1,5 @@
 package ldpd.suso.service;
 
-import ldpd.suso.entity.Quiz;
 import ldpd.suso.entity.Sign;
 import ldpd.suso.repository.SignRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +33,7 @@ public class SignService {
             file.transferTo(saveFile);
 
             sign.setFilename(fileName);
-            sign.setFilepath("/files/" + fileName);
+            sign.setFilepath("/static/files/" + fileName);
             signRepository.save(sign);
         } else {
             signRepository.save(sign);

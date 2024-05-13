@@ -3,6 +3,7 @@ package ldpd.suso.security;
 import ldpd.suso.entity.Member;
 import ldpd.suso.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
