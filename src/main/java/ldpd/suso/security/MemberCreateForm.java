@@ -1,9 +1,16 @@
 package ldpd.suso.security;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
+@Getter
 public class MemberCreateForm {
 
     @NotEmpty(message = "사용자ID는 필수항목입니다.")
@@ -17,4 +24,8 @@ public class MemberCreateForm {
 
     @NotEmpty(message = "이름은 필수항목입니다.")
     private String name;
+
+    @Email(message = "유효하지 않은 이메일 주소입니다.")
+    private String email;
+
 }

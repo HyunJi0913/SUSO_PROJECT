@@ -3,7 +3,6 @@ package ldpd.suso.entity;
 import jakarta.persistence.*;
 import ldpd.suso.security.MemberRole;
 import lombok.Data;
-import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
@@ -22,6 +21,7 @@ public class Member {
 
     private String name;
 
+    private String email;
     @CreationTimestamp
     private Timestamp createdAt;
 

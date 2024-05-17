@@ -1,20 +1,20 @@
 package ldpd.suso.controller;
 
+import ldpd.suso.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
+@RequiredArgsConstructor
 @Controller
 public class MainController {
 
-    @GetMapping("/home")
-    public String mainPage() {
+    @GetMapping("/home")    //메인 화면에 대한 Get 방식 프로토콜 메소드
+    public String mainPage(Model model) {
 
         return "main";
     }
 
-    // 마이페이지 경로 처리 추가
-    @GetMapping("/user/mypage")
-    public String myPage() {
-        return "member/mypage"; // "member/mypage.html" Thymeleaf 템플릿을 렌더링
-    }
 }

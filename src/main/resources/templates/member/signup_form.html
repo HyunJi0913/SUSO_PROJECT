@@ -1,32 +1,178 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
-    <link rel="stylesheet" href="/suso/src/css/signupstyle.css">
-</head><body>
-<div class="signup-container">
-    <h4 class="title">회원가입</h4>
-    <form th:action="@{/signup}" th:object="${memberCreateForm}" method="post" class="signup-form">
-        <div th:replace="~{member/form_errors :: formErrorsFragment}"></div>
-        <div class="form-group">
-            <label for="username">아이디</label>
-            <input type="text" id="username" th:field="*{username}">
-        </div>
-        <div class="form-group">
-            <label for="password1">비밀번호</label>
-            <input type="password" id="password1" th:field="*{password1}">
-        </div>
-        <div class="form-group">
-            <label for="password2">비밀번호 확인</label>
-            <input type="password" id="password2" th:field="*{password2}">
-        </div>
-        <div class="form-group">
-            <label for="name">이름</label>
-            <input type="text" id="name" th:field="*{name}">
-        </div>
-        <button type="submit" class="submit-button">가입하기</button>
-    </form>
-</div>
+    <link rel="stylesheet" href="signupstyle.css">
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div id="signup-root"></div>
+<script type="text/babel">
+    const { useState } = React;
+
+    const Signup = () => {
+        const [formData, setFormData] = useState({
+            username: '',
+            password1: '',
+            password2: '',
+            name: '',
+            email: ''
+        });
+
+        const handleChange = (e) => {
+            const { id, value } = e.target;
+            setFormData((prevData) => ({
+                ...prevData,
+                [id]: value
+            }));
+        };
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            // 폼 데이터를 서버로 제출하는 로직을 여기에 추가
+            console.log('Form submitted:', formData);
+        };
+
+        return (
+            <div className="signup-container">
+                <h4 className="title">회원가입</h4>
+                <form onSubmit={handleSubmit} className="signup-form">
+                    <div className="form-group">
+                        <label htmlFor="username">아이디</label>
+                        <input
+                            type="text"
+                            id="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password1">비밀번호</label>
+                        <input
+                            type="password"
+                            id="password1"
+                            value={formData.password1}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password2">비밀번호 확인</label>
+                        <input
+                            type="password"
+                            id="password2"
+                            value={formData.password2}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="name">이름</label>
+                        <input
+                            type="text"
+                            id="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label">이메일</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-primary">회원가입</button>
+                </form>
+            </div>
+        );
+    };
+
+    ReactDOM.render(<Signup />, document.getElementById('signup-root'));
+</script>
 </body>
 </html>
+
+<style>
+    @font-face {
+        font-family: 'BMJUA';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    body {
+        font-family: 'BMJUA', sans-serif; /* 폰트 적용 */
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff; /* 전체 배경색을 흰색으로 설정 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .signup-container {
+        padding: 20px;
+        width: 90%;
+        max-width: 300px;
+        background-color: #ffffff; /* 회원가입 양식 배경색을 흰색으로 설정 */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .title {
+        font-size: 20px; /* 폰트 크기 조정 */
+        margin-bottom: 24px; /* 여백 조정 */
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .form-group {
+        width: 100%; /* 폼 그룹의 너비를 100%로 설정 */
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px; /* 라벨과 입력 필드 간의 여백 조정 */
+        font-size: 16px; /* 폰트 크기 조정 */
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] { /* 이메일 입력 필드에도 같은 스타일 적용 */
+        width: 100%; /* 입력 필드의 너비를 90%로 조정 */
+        margin: auto; /* 자동 마진으로 중앙 정렬 */
+        padding: 10px; /* 패딩 조정 - 상하 패딩을 조금 줄여 더 정확한 높이 조정 가능 */
+        height: 20px; /* 입력 필드의 높이를 40픽셀로 설정 */
+        border: 1px solid #ccc;
+        border-radius: 5px; /* 입력 필드 모서리 둥글게 */
+        font-size: 14px; /* 입력 필드 폰트 크기 조정 */
+        margin-bottom: 10px;
+    }
+
+    .submit-button,
+    button[type="submit"] { /* 폼 제출 버튼에 대한 스타일 */
+        font-family: 'BMJUA', sans-serif; /* 폰트 적용 */
+        width: 100%;
+        padding: 15px; /* 패딩 조정 */
+        background-color: #81D4FA; /* 배경 색상 */
+        color: white; /* 텍스트 색상 */
+        border: none;
+        border-radius: 5px; /* 버튼 모서리 둥글게 */
+        cursor: pointer;
+        margin-top: 20px; /* 버튼 상단 여백 추가 */
+        margin-bottom: 10px; /* 버튼 하단 여백 조정 */
+    }
+
+    button[type="button"] {
+        font-family: 'BMJUA', sans-serif; /* 폰트 적용 */
+        background-color: #6c757d; /* '뒤로 가기' 버튼 색상 */
+    }
+</style>

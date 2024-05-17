@@ -1,20 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import LoginForm from './components/LoginForm';
-import SignupForm from './components/SignupForm';
+import LoginForm from '../main/templates/member/LoginForm'; // 경로 업데이트
 
 function App() {
-  const [showSignupForm, setShowSignupForm] = useState(false);
-
   return (
     <div className="App">
-      <header className="App-header">
-        {!showSignupForm ? (
-          <LoginForm onSignupClick={() => setShowSignupForm(true)} />
-        ) : (
-          <SignupForm onBackClick={() => setShowSignupForm(false)} />
-        )}
-      </header>
+      <LoginForm /> // LoginForm 컴포넌트 렌더링
     </div>
   );
 }

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -24,11 +23,11 @@ public class MemberSecurityService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Member> _member = this.memberRepository.findByusername(username);
-        if (_member.isEmpty()) {
+        Member _member = this.memberRepository.findByusername(username);
+        if (_member.getMember_id()==null) {
             throw new UsernameNotFoundException("사용자를 찾을수 없습니다.");
         }
-        Member member = _member.get();
+        Member member = _member;
         List<GrantedAuthority> authorities = new ArrayList<>();
         if ("admin".equals(username)) {
             authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
