@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>회원가입</title>
     <link rel="stylesheet" href="/suso/src/css/signupstyle.css">
-</head><body>
+</head>
+<body>
 <div class="signup-container">
     <h4 class="title">회원가입</h4>
     <form th:action="@{/signup}" th:object="${memberCreateForm}" method="post" class="signup-form">
@@ -29,93 +30,100 @@
             <label for="email" class="form-label">이메일</label>
             <input type="email" id="email" th:field="*{email}" class="form-control">
         </div>
-
-        <button type="submit" class="btn btn-primary">회원가입</button>
+        <div class="submitcontainer">
+            <button type="submit" class="btn btn-primary submit-button">회원가입</button>
+        </div>
     </form>
 </div>
 </body>
 </html>
 <style>
     @font-face {
-    font-family: 'BMJUA';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-body {
-    font-family: 'BMJUA', sans-serif; /* 폰트 적용 */
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff; /* 전체 배경색을 흰색으로 설정 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.signup-container {
-    padding: 20px;
-    width: 90%;
-    max-width: 300px;
-    background-color: #ffffff; /* 회원가입 양식 배경색을 흰색으로 설정 */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.title {
-    font-size: 20px; /* 폰트 크기 조정 */
-    margin-bottom: 24px; /* 여백 조정 */
-    text-align: center;
-    padding-bottom: 10px;
-}
-
-.form-group {
-    width: 100%; /* 폼 그룹의 너비를 100%로 설정 */
+        font-family: 'BMJUA';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
     }
 
-label {
-    display: block;
-    margin-bottom: 10px; /* 라벨과 입력 필드 간의 여백 조정 */
-    font-size: 16px; /* 폰트 크기 조정 */
-}
+    @font-face {
+        font-family: 'HakgyoansimBareondotumB';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimBareondotumB.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+    }
 
-input[type="text"],
-input[type="password"],
-input[type="email"] { /* 이메일 입력 필드에도 같은 스타일 적용 */
-    width: 100%; /* 입력 필드의 너비를 90%로 조정 */
-    margin: auto; /* 자동 마진으로 중앙 정렬 */
-    padding: 10px; /* 패딩 조정 - 상하 패딩을 조금 줄여 더 정확한 높이 조정 가능 */
-    height: 20px; /* 입력 필드의 높이를 40픽셀로 설정 */
-    border: 1px solid #ccc;
-    border-radius: 5px; /* 입력 필드 모서리 둥글게 */
-    font-size: 14px; /* 입력 필드 폰트 크기 조정 */
-    margin-bottom:10px;
-}
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: white; /* 부드러운 그레이 배경 */
+    }
 
+    body {
+        font-family: 'HakgyoansimBareondotumB', sans-serif;  /* 전체 페이지에 적용 */
+        background-position: center;
+        background-repeat: no-repeat;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        margin: 0;
+    }
 
+    .signup-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 모든 자식 요소를 가운데 정렬 */
+        width: 100%; /* 부모 컨테이너의 너비를 최대로 설정 */
+    }
 
-.submit-button,
-button[type="submit"] { /* 폼 제출 버튼에 대한 스타일 */
-    font-family: 'BMJUA', sans-serif; /* 폰트 적용 */
-    width: 100%;
-    padding: 15px; /* 패딩 조정 */
-    background-color: #81D4FA; /* 배경 색상 */
-    color: white; /* 텍스트 색상 */
-    border: none;
-    border-radius: 5px; /* 버튼 모서리 둥글게 */
-    cursor: pointer;
-    margin-top: 20px; /* 버튼 상단 여백 추가 */
-    margin-bottom: 10px; /* 버튼 하단 여백 조정 */
-}
+    .title {
+        font-size: 60px; /* 폰트 크기 조정 */
+        font-family: 'BMJUA', sans-serif;
+        margin-bottom: 10px; /* 여백 조정 */
+        text-align: center;
+        padding-bottom: 5%;
+        font-family: 'HakgyoansimBareondotumB', sans-serif;  /* 전체 페이지에 적용 */
+    }
 
+    .form-group {
+        width: 100%; /* 폼 그룹의 너비를 100%로 설정 */
+    }
 
-button[type="button"] {
-    font-family: 'BMJUA', sans-serif; /* 폰트 적용 */
-    background-color: #6c757d; /* '뒤로 가기' 버튼 색상 */
-}
+    label {
+        display: block;
+        font-size: 40px; /* 폰트 크기 조정 */
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] { /* 이메일 입력 필드에도 같은 스타일 적용 */
+        width: 90%; /* 입력 필드의 너비를 100%로 설정 */
+        margin: auto; /* 자동 마진으로 중앙 정렬 */
+        padding: 30px; /* 패딩 조정 - 상하 패딩을 조금 줄여 더 정확한 높이 조정 가능 */
+        height: 20px; /* 입력 필드의 높이를 20픽셀로 설정 */
+        border: 3px solid #ccc;
+        border-radius: 5px; /* 입력 필드 모서리 둥글게 */
+        margin-bottom: 15%; /* 라벨과 입력 필드 간의 여백 조정 */
+        font-size: 40px; /* 입력 필드 폰트 크기 조정 */
+    }
+
+    .submit-button,
+    button[type="submit"] {
+        font-family: 'HakgyoansimBareondotumB', sans-serif;  /* 전체 페이지에 적용 */
+        width: 100%; /* 버튼의 너비를 100%로 설정 */
+        padding: 30px ; /* 패딩 조정 */
+        background-color: GRAY; /* 배경 색상 */
+        color: white; /* 텍스트 색상 */
+        font-size: 35px; /* 폰트 크기 조정 */
+        border: none;
+        border-radius: 5px; /* 버튼 모서리 둥글게 */
+        cursor: pointer;
+        margin-top: 10%; /* 버튼 상단 여백 추가 */
+    }
+
+    button[type="button"] {
+        font-family: 'HakgyoansimBareondotumB', sans-serif;  /* 전체 페이지에 적용 */
+        background-color: #6c757d; /* '뒤로 가기' 버튼 색상 */
+    }
 
 </style>

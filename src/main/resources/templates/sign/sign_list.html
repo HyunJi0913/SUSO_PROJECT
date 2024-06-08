@@ -12,15 +12,27 @@
         font-style: normal;
     }
 
+
+
+    @font-face {
+        font-family: 'HakgyoansimBareondotumB';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimBareondotumB.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+    }
+
     html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: white; /* 배경색을 회색으로 설정 */
   }
 
-    body {
+     body {
         font-family: 'BMJUA', sans-serif;
-        background-size: cover;
+
+    background-image: url('/image/main.png'); /* Add this line */
+    background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         justify-content: center;
@@ -28,19 +40,44 @@
         display: flex;
         margin: 0;
     }
-    .layout {
-      width: 90%;
-      max-width: 90%;
-      background-color: #EEEEEE;
-      padding: 20px;
-      border-radius: 10px;
+
+    .main {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        padding-top: 100px; /* Add top padding to push the content below the fixed header */
     }
-    .header {
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 모든 자식 요소를 가운데 정렬 */
+    width: 100%; /* 부모 컨테이너의 너비를 최대로 설정 */
+}
+
+    .fixed-title{
+      font-family: 'BMJUA', sans-serif;
         color: black;
         text-align: center;
         padding: 5% 0;
         font-size: 60px;
     }
+
+   .header {
+      position: fixed;  /* Keep the header at a fixed position */
+      top: 0;           /* Align the header at the top of the viewport */
+      left: 0;          /* Align the header to the left of the viewport */
+      right: 0;         /* Align the header to the right of the viewport */
+      width: 90%;       /* Ensure the header spans the full width of the viewport */
+      margin: auto;     /* Automatically adjust the margin to center the header */
+      z-index: 1000;    /* Higher index to keep the header above other content */
+  }
 
     .header p {
         display: inline;
@@ -49,13 +86,35 @@
     }
 
     .search-section {
+        font-family: 'HakgyoansimBareondotumB', sans-serif;  /* 전체 페이지에 적용 */
         background-color: none;
-        padding: 0px 10px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom:10%;
+    }
+
+    .search-section input[type="text"] {
+    flex-grow: 1;
+    border: 2px solid #00BFFF;
+    padding: 20px;
+    border-radius: 20px;
+    font-size: 30px;
+    font-family: 'HakgyoansimBareondotumB', sans-serif; /* 폰트 변경 */
+}
+
+    .video-item .video-info p {
+        font-size: 30px;
+        color: lightgray; /* 텍스트 색상 변경 */
+    }
+
+    .search-section {
+        background-color: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
     }
 
     .search-section input[type="text"] {
@@ -63,34 +122,38 @@
         border: 2px solid #00BFFF;
         padding: 20px;
         border-radius: 20px;
+        font-family: 'HakgyoansimBareondotumB', sans-serif;
         font-size: 30px;
-        font-family: 'BMJUA', sans-serif;
     }
 
     .search-section button {
         background-color: #00BFFF;
         color: white;
-        width:10%;
         border: none;
         border-radius: 20px;
+        font-family: 'HakgyoansimBareondotumB', sans-serif;
         padding: 20px 20px;
-        font-family: 'BMJUA', sans-serif;
-        font-size: 28px;
+        font-size: 30px;
         margin-left: 10px;
         cursor: pointer;
     }
+
     .video-item {
+    width: 90%;
     display: grid;
     grid-template-columns: auto 1fr auto; /* 이미지, 비디오 정보, 버튼 */
     grid-template-rows: auto auto; /* 두 줄 구성 */
     align-items: center;
-    gap: 10px; /* 요소 간 간격 */
-    margin-bottom: 5%;
     border-radius: 35px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4); /* 그림자 추가 */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4); /* 그림자 추가 */
     background-color: white;
-    padding: 10px;
+    padding: 15px;
+    margin: 0 auto; /* 상하 마진을 10%로, 좌우 마진을 auto로 설정하여 가운데 정렬 */
+    margin-bottom:5%;
 }
+
+
+
 
 .video-item img {
   grid-row: 1 / 3; /* 이미지는 두 행을 차지 */
@@ -114,7 +177,7 @@
 .video-item .view-details {
   grid-column: 3; /* 버튼은 세 번째 열 */
   grid-row: 2; /* 버튼은 두 번째 행 */
-  font-family: 'BMJUA', sans-serif;
+      font-family: 'HakgyoansimBareondotumB', sans-serif;  /* 전체 페이지에 적용 */
       padding:15px;
       font-size:30px;
       border: none;
@@ -122,19 +185,61 @@
       color: white;
       border-radius: 5px;
       cursor: pointer;
+          margin-right: 10px;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.pagination button {
+    border: none;
+    background-color: #81D4FA; /* Light blue background, matching your header p color */
+    color: white;
+    font-size: 30px;
+    padding: 10px 20px;
+    margin: 0 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effects */
+}
+
+.pagination button:hover {
+    background-color: #00BFFF; /* A darker blue for hover state */
+    transform: translateY(-2px); /* Slight raise effect on hover */
+}
+
+.pagination button:disabled {
+    background-color: #ccc; /* Greyed out button for disabled state */
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 40px;
+    text-decoration: underline;
+    color: #333; /* Dark grey for contrast */
 }
 
     .navbar {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background-color: #f8f8f8;
-      padding: 20px 0;
-      border-top: 1px solid #ddd;
-      width: 100%;
-      border-radius: 10px;
-      margin-top: 15%;
-    }
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+  width: 100%;
+  border-radius: 10px;
+  position: fixed; /* 고정 위치 */
+  bottom: 0; /* 하단 */
+  left: 0; /* 왼쪽 경계 */
+  right: 0; /* 오른쪽 경계 */
+  z-index: 1000; /* 다른 요소들 위에 나타나도록 z-index 설정 */
+}
+
     .navbar a {
       display: flex;
       flex-direction: column;
@@ -156,71 +261,101 @@
     .navbar a:hover {
       color: #007bff;
     }
+
+    .admin-sign-button {
+  background-color: #00BFFF; /* 파란색 배경 */
+  color: white; /* 흰색 텍스트 */
+  border: none; /* 테두리 없음 */
+  border-radius: 20px; /* 모서리 둥글게 */
+  padding: 15px 30px; /* 상하 15px, 좌우 30px 패딩 */
+  font-size: 20px; /* 폰트 크기 */
+  cursor: pointer; /* 커서 모양 변경 */
+  font-family: 'HakgyoansimBareondotumB', sans-serif; /* 폰트 설정 */
+  transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
+}
+
+.admin-sign-button:hover {
+  background-color: #0094CC; /* 호버 시 배경색 변경 */
+}
+
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const itemsPerPage = 4; // 한 페이지에 표시할 요소의 수
+        const items = document.querySelectorAll('.video-item'); // 모든 video-item 요소를 선택
+        let currentPage = 1; // 현재 페이지 번호
+
+        function showItems() {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            items.forEach((item, index) => {
+                item.style.display = (index >= startIndex && index < endIndex) ? '' : 'none';
+            });
+        }
+
+        window.changePage = function(step) {
+            const pageCount = Math.ceil(items.length / itemsPerPage);
+            currentPage += step;
+            currentPage = Math.max(1, Math.min(currentPage, pageCount)); // 페이지 번호를 유효한 범위 내로 제한
+            showItems();
+            document.getElementById('pageNumber').textContent = currentPage; // 페이지 번호 업데이트
+        }
+
+        showItems(); // 초기 페이지 로드 시 아이템 표시
+    });
+  </script>
+
+
 </head>
 <body>
 <div class="layout">
-
   <div class="header">
-    <p>한</p>수 <p>사</p>전
+    <div class="fixed-title"><p>한</p>수 <p>사</p>전</div>
+
+    <!-- Search Section -->
+    <div class="search-section">
+      <input type="text" placeholder="검색어를 입력하세요...">
+      <button type="submit">검색</button>
+    </div>
   </div>
 
-  <!-- Search Section -->
-  <div class="search-section">
-    <input type="text" placeholder="검색어를 입력하세요...">
-    <button type="submit">검색</button>
-  </div>
 
-  <div class="video-item">
+  <div th:each="sign : ${list}" class="video-item">
     <img src="https://via.placeholder.com/80" alt="Video Thumbnail">
     <div class="video-info">
-      <h3 class="title">데이터</h3>
+      <h3 class="title" th:text="${sign.title}"></h3>
       <p class="description">서버에서 데이터 가져오기</p>
     </div>
-    <button class="view-details">수어 풀이 보기</button> <!-- 이 버튼을 video-info 바깥으로 이동 -->
+    <a th:href="@{/sign/{id}(id=${sign.id})}" class="view-details">수어 풀이 보기</a>
   </div>
 
-
-  <div class="video-item">
-    <img src="https://via.placeholder.com/80" alt="Video Thumbnail">
-    <div class="video-info">
-      <h3 class="title">데이터</h3>
-      <p class="description">서버에서 데이터 가져오기</p>
-    </div>
-    <button class="view-details">수어 풀이 보기</button> <!-- 이 버튼을 video-info 바깥으로 이동 -->
-  </div>
-
-
-  <div class="video-item">
-    <img src="https://via.placeholder.com/80" alt="Video Thumbnail">
-    <div class="video-info">
-      <h3 class="title">데이터</h3>
-      <p class="description">서버에서 데이터 가져오기</p>
-    </div>
-    <button class="view-details">수어 풀이 보기</button> <!-- 이 버튼을 video-info 바깥으로 이동 -->
+<!--  <div class="pagination">-->
+<!--    <th:block th:if="${page != 0 }" th:each="page : ${#numbers.sequence(startPage, endPage)}">-->
+<!--      &lt;!&ndash; 현재 페이지가 아닌 경우 링크를 표시 &ndash;&gt;-->
+<!--      <a th:if="${page != nowPage}" th:href="@{/sign/list(page=${page - 1}, searchKeyword=${param.searchKeyword})}" th:text="${page}"></a>-->
+<!--      &lt;!&ndash; 현재 페이지인 경우 강조 표시 &ndash;&gt;-->
+<!--      <strong th:if="${page == nowPage}" th:text="${page}" style="color: black;"></strong>-->
+<!--    </th:block>-->
+<!--  </div>-->
+  <div class="pagination">
+    <button id="previousPage" onclick="changePage(-1)">이전</button>
+    <span id="pageNumber">1</span>
+    <button id="nextPage" onclick="changePage(1)">다음</button>
   </div>
 
 
 
-  <div class="navbar">
-    <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="footer-link">
-      <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-    </a>
-    <a href="#">
-      <i class="fas fa-search"></i>
-      <span>Search</span>
-    </a>
-    <a sec:authorize="isAuthenticated()" th:href="@{/home}" class="footer-link">
-      <i class="fas fa-home"></i><span>Home</span>
-    </a>
-    <a href="#">
-      <i class="fas fa-bookmark"></i>
-      <span>Saved List</span>
-    </a>
-    <a sec:authorize="isAuthenticated()" th:href="@{/user/mypage}" class="footer-link">
-      <i class="fas fa-user"></i><span>My Page</span>
-    </a>
+  <div class="post">
+    <button sec:authorize="hasRole('ADMIN')" onclick="location.href='/admin/sign'" class="admin-sign-button">수어 사전 등록</button>
   </div>
+
+  <div th:replace="navbar :: navbar"></div>
 </div>
 </body>
+<script>
+  document.querySelector('.admin-sign-button').addEventListener('click', function() {
+    window.location.href = '/admin/sign';
+  });
+</script>
+
 </html>

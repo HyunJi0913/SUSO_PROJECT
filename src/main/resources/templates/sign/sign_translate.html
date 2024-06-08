@@ -7,24 +7,21 @@
 <body>
 <video id="video" width="100%" height="100%" autoplay></video>
 
-<div id="result"></div>
-
 <script>
     const video = document.getElementById('video');
-let mediaRecorder;
-let chunks = [];
+    let mediaRecorder;
+    let chunks = [];
 
-// 웹캠 비디오 스트림 가져오기
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => {
-        video.srcObject = stream;
-        mediaRecorder = new MediaRecorder(stream);
-        mediaRecorder.ondataavailable = handleDataAvailable;
-    })
-    .catch(err => {
-        console.error('Error accessing webcam:', err);
-    });
-
+    // 웹캠 비디오 스트림 가져오기
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            video.srcObject = stream;
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = handleDataAvailable;
+        })
+        .catch(err => {
+            console.error('Error accessing webcam:', err);
+        });
 </script>
 </body>
 </html>

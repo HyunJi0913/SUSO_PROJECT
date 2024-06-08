@@ -1,39 +1,54 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>수화로 소통하는 수소</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="main">
     <div class="header">
-        <p>수</p>화로 <p>소</p>통하는 <p>수소</p>
-    </div>
-
-    <!-- Search Section -->
-    <div class="search-section">
-        <input type="text" placeholder="검색어를 입력하세요...">
-        <button type="submit">검색</button>
+        <div class="fixed-title"><p>수</p>화로 <p>소</p>통하는 <p>수소</p></div>
     </div>
 
     <!-- Today's Sign Section -->
     <div class="today-sign">
-        <h2>오늘의 수어</h2>
+        <div class="todayword">
+            <h2>오늘의 수어</h2>
+        </div>
+
         <div class="video-grid">
-            <div class="video">
-                <video src="video1.mp4" controls></video>
-                <p>아버지</p>
+            <!-- 첫 번째 행 -->
+            <div class="row">
+                <div class="video" th:each="sign, iterStat : ${mainVideo}" th:if="${iterStat.index < 2}">
+                    <video th:src="@{${sign.filepath}}" controls></video>
+                    <p th:text="${sign.title}"></p>
+                </div>
             </div>
-            <div class="video">
-                <video src="video2.mp4" controls></video>
-                <p>어머니</p>
+            <!-- 두 번째 행 -->
+            <div class="row">
+                <div class="video" th:each="sign, iterStat : ${mainVideo}" th:if="${iterStat.index >= 2}">
+                    <video th:src="@{${sign.filepath}}" controls></video>
+                    <p th:text="${sign.title}"></p>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Sign Resources Section -->
     <div class="resources">
+        <a sec:authorize="isAnonymous()" href="#" class="resource" data-toggle="modal" data-target="#loginRequiredModal">
+            <img src="/image/transfer.png" alt="수어 번역 기능">
+            <div class="text">
+                <p>수어 번역</p><br>
+                <div class="description">
+                    카메라로 찍은 수화 동작을 인식하여 그 의미를 텍스트로 번역
+                </div>
+            </div>
+        </a>
         <a sec:authorize="isAuthenticated()" th:href="@{/sign/translate}" class="resource">
             <img src="/image/transfer.png" alt="수어 번역 기능">
             <div class="text">
@@ -43,12 +58,32 @@
                 </div>
             </div>
         </a>
+
+        <a sec:authorize="isAnonymous()" href="#" class="resource" data-toggle="modal" data-target="#loginRequiredModal">
+            <img src="/image/dictionary.png" alt="수어 사전 기능">
+            <div class="text">
+                <p>수어 사전 검색</p>
+                <div class="description">
+                    원하는 수화 동작의 의미를 찾기 위해 다양한 수어를 검색할 수 있는 사진
+                </div>
+            </div>
+        </a>
         <a sec:authorize="isAuthenticated()" th:href="@{/sign/list}" class="resource">
             <img src="/image/dictionary.png" alt="수어 사전 기능">
             <div class="text">
                 <p>수어 사전 검색</p>
                 <div class="description">
                     원하는 수화 동작의 의미를 찾기 위해 다양한 수어를 검색할 수 있는 사진
+                </div>
+            </div>
+        </a>
+
+        <a sec:authorize="isAnonymous()" href="#" class="resource" data-toggle="modal" data-target="#loginRequiredModal">
+            <img src="/image/quiz.png" alt="수어 퀴즈 기능">
+            <div class="text">
+                <p>수어 퀴즈</p>
+                <div class="description">
+                    수화 영상을 보고 의미를 맞추는 퀴즈
                 </div>
             </div>
         </a>
@@ -63,26 +98,54 @@
         </a>
     </div>
 
-    <div class="footer">
+    <!-- 로그인 필요 모달 -->
+    <div class="modal fade" id="loginRequiredModal" tabindex="-1" role="dialog" aria-labelledby="loginRequiredModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginRequiredModalLabel">Login Required</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    로그인이 필요한 서비스입니다.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <!-- Links for Authenticated Users -->
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="footer-link">
-            <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
         </a>
-        <button><i class="fas fa-search"></i><span>Search</span></button>
-        <button><i class="fas fa-home"></i><span>Home</span></button>
-
-        <!-- 로그인 상태에서는 Saved List 버튼 보이기 -->
-        <button sec:authorize="isAuthenticated()"><i class="fas fa-bookmark"></i><span>Saved List</span></button>
-
-        <!-- 로그아웃 상태에서는 Log In 버튼 보이기 -->
         <a sec:authorize="isAnonymous()" th:href="@{/login}" class="footer-link">
-            <i class="fas fa-sign-in-alt"></i><span>Log In</span>
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Login</span>
         </a>
-
+        <a th:href="@{/home}" class="footer-link">
+            <i class="fas fa-home"></i><span>Home</span>
+        </a>
         <a sec:authorize="isAuthenticated()" th:href="@{/user/mypage}" class="footer-link">
             <i class="fas fa-user"></i><span>My Page</span>
         </a>
+
+        <a sec:authorize="isAnonymous()" th:href="@{/signup}" class="footer-link">
+            <i class="fas fa-user-plus"></i><span>Sign Up</span>
+        </a>
     </div>
+
 </div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style>
     @font-face {
@@ -92,17 +155,27 @@
         font-style: normal;
     }
 
-    html, body {
-    height: 100%;
+    @font-face {
+        font-family: 'HakgyoansimBareondotumB';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimBareondotumB.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    body, html {
     margin: 0;
     padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
 }
+
 
     body {
         font-family: 'BMJUA', sans-serif;
-        background-size: cover;
+        background-image: url('/image/main.png'); /* Add this line */
         background-position: center;
         background-repeat: no-repeat;
+        background-size: cover; /* Ensures the background covers the entire body */
         justify-content: center;
         align-items: center;
         display: flex;
@@ -112,89 +185,71 @@
     .main {
         width: 90%;
         max-width: 90%;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
         overflow: hidden;
-        padding: 20px;
         text-align: center;
-        background: white;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+            min-height: auto; /* 또는 적절한 값으로 조정 */
         min-height: 100%;
+        padding-top: 100px;
+    }
+
+    .fixed-title {
+        font-family: 'BMJUA', sans-serif;
+        color: black;
+        text-align: center;
+        padding: 8%;
+        font-size: 60px;
     }
 
     .header {
-        color: black;
-        text-align: center;
-        padding: 10% 0;
-        font-size: 30px;
+        position: fixed;  /* Keep the header at a fixed position */
+        top: 0;           /* Align the header at the top of the viewport */
+        left: 0;          /* Align the header to the left of the viewport */
+        right: 0;         /* Align the header to the right of the viewport */
+        width: 90%;       /* Ensure the header spans the full width of the viewport */
+        margin: auto;     /* Automatically adjust the margin to center the header */
+        z-index: 1000;    /* Higher index to keep the header above other content */
+
     }
 
     .header p {
         display: inline;
-        font-size: 25px;
+        font-size: 60px;
         color: #81D4FA;
-        margin: 0;
-        padding: 0 2px;
     }
 
-    .search-section {
-        background-color: none;
-        padding: 0px 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-    }
 
-    .search-section input[type="text"] {
-        flex-grow: 1;
-        border: 2px solid #00BFFF;
-        padding: 10px;
+    .todayword {
+        margin: 0 auto;
+        background-color: white;
+        width: 60%;
+        font-family: 'HakgyoansimBareondotumB', sans-serif;  /* 전체 페이지에 적용 */
         border-radius: 20px;
-        font-size: 16px;
-    }
-
-    .search-section button {
-        background-color: #00BFFF;
-        color: white;
-        border: none;
-        border-radius: 20px;
-        padding: 10px 20px;
-        font-size: 16px;
-        margin-left: 10px;
-        cursor: pointer;
-    }
-
-    .today-sign {
-        margin-bottom: 20px;
-    }
-
-    .today-sign h2{
-        margin:0 auto;
-        width:50%;
-        padding-top:5px;
-        padding-bottom:5px;
-        background-color:white;
-        border-radius: 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-
+        padding:10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        margin-top:20%;
+        margin-bottom:5%;
     }
 
     .video-grid {
-        background-color:white;
+        display: flex;
+        background-color: white;
+        flex-direction: column; /* Change to column for rows */
+        border-radius: 20px;
+        padding: 5%;
+        margin-bottom: 5%;
+    }
+
+    .row {
         display: flex;
         justify-content: space-around;
-        padding: 20px;
-        border-radius: 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.4);
     }
 
     .video {
         text-align: center;
-        width: 45%;
+        width: 48%; /* Adjust width as necessary */
     }
 
     .video video {
@@ -204,32 +259,30 @@
 
     .video p {
         color: #333;
-        font-size: 16px;
-        margin-top: 5px;
+        font-size: 40px;
     }
 
+
     .resources {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 0;  /* 기존 값에서 변경 */
     }
 
     .resource {
+        margin-bottom: 10%;  /* 수직 간격을 30px로 증가 */
         background-color: #fff;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         width: 100%;
-        margin: 10px 0;
-        padding: 20px;
         text-align: left;
         display: flex;
         align-items: center;
+        padding:10px;
+        transition: all 0.3s ease; /* 부드러운 확장을 위한 전환 효과 */
     }
 
     .resource img {
-        width: 60px;
-        height: 60px;
+        width: 20%;
+        height: auto;
         margin-right: 20px;
     }
 
@@ -240,61 +293,35 @@
 
     .resource p {
         margin: 5px 0;
-        font-size: 16px;
+        font-size: 40px;
         color: #333;
     }
 
     .resource .description {
-        font-size: 14px;
+        font-size: 35px;
         color: #666;
-        margin-top: 5px;
     }
 
     .resource:hover {
         transform: translateY(-5px);
     }
 
-    .footer {
+    .navbar {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-around; /* 중앙 정렬 */
         align-items: center;
         background-color: #f8f8f8;
-        padding: 10px 0;
-        border-top: 1px solid #ddd;
+        padding: 20px 0;
         width: 100%;
         border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
     }
 
-    .footer button {
-        background: none;
-        border: none;
-        outline: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        color: #333;
-        cursor: pointer;
-    }
-
-    .footer button i {
-        font-size: 24px;
-        margin-bottom: 5px;
-    }
-
-    .footer button span {
-        display: block;
-        font-size: 12px;
-    }
-
-    .footer button:hover {
-        color: #007bff;
-    }
-
-    .footer-link {
+    .navbar a {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -305,19 +332,20 @@
         text-decoration: none;
     }
 
-    .footer-link i {
-        font-size: 24px;
-        margin-bottom: 5px;
+    .navbar a i {
+        font-size: 40px;
+        margin-bottom: 20%;
     }
 
-    .footer-link span {
+    .navbar a span {
         display: block;
-        font-size: 12px;
+        font-size: 30px;
     }
 
-    .footer-link:hover {
+    .navbar a:hover {
         color: #007bff;
     }
+
 
 </style>
 </body>
