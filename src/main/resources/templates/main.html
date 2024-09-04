@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+
     <title>수화로 소통하는 수소</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Bootstrap CSS -->
@@ -162,13 +162,11 @@
         font-style: normal;
     }
 
-    body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden; /* 가로 스크롤 방지 */
-}
-
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
 
     body {
         font-family: 'BMJUA', sans-serif;
@@ -183,54 +181,39 @@
     }
 
     .main {
-        width: 90%;
         max-width: 90%;
-        border-radius: 10px;
-        overflow: hidden;
         text-align: center;
-        display: flex;
-        flex-direction: column;
-            min-height: auto; /* 또는 적절한 값으로 조정 */
         min-height: 100%;
-        padding-top: 100px;
+        padding-top: 5%; /* 헤더 높이에 따라 조정 가능 */
+        padding-bottom: 15%; /* navbar와의 간격을 위해 하단 패딩 추가 */
     }
 
     .fixed-title {
         font-family: 'BMJUA', sans-serif;
         color: black;
         text-align: center;
-        padding: 8%;
-        font-size: 60px;
+        font-size: 6VW;
+        width: 100%;
+        padding-bottom: 5%;
+        text-align: center;
     }
 
-    .header {
-        position: fixed;  /* Keep the header at a fixed position */
-        top: 0;           /* Align the header at the top of the viewport */
-        left: 0;          /* Align the header to the left of the viewport */
-        right: 0;         /* Align the header to the right of the viewport */
-        width: 90%;       /* Ensure the header spans the full width of the viewport */
-        margin: auto;     /* Automatically adjust the margin to center the header */
-        z-index: 1000;    /* Higher index to keep the header above other content */
-
-    }
 
     .header p {
         display: inline;
-        font-size: 60px;
+        font-size: 6VW;
         color: #81D4FA;
     }
 
-
     .todayword {
         margin: 0 auto;
+        padding:1%;
         background-color: white;
         width: 60%;
+        margin-bottom: 3%;
         font-family: 'HakgyoansimBareondotumB', sans-serif;  /* 전체 페이지에 적용 */
         border-radius: 20px;
-        padding:10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-        margin-top:20%;
-        margin-bottom:5%;
     }
 
     .video-grid {
@@ -239,7 +222,8 @@
         flex-direction: column; /* Change to column for rows */
         border-radius: 20px;
         padding: 5%;
-        margin-bottom: 5%;
+        margin-bottom: 10%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     }
 
     .row {
@@ -249,41 +233,37 @@
 
     .video {
         text-align: center;
-        width: 48%; /* Adjust width as necessary */
+        width: 48%;
     }
 
     .video video {
-        width: 100%;
+        width: 90%;
         border-radius: 10px;
     }
 
     .video p {
         color: #333;
-        font-size: 40px;
+        font-size: 4vw;
     }
 
 
-    .resources {
-        margin-bottom: 0;  /* 기존 값에서 변경 */
-    }
 
     .resource {
-        margin-bottom: 10%;  /* 수직 간격을 30px로 증가 */
+        margin-bottom: 7%;
         background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         width: 100%;
         text-align: left;
         display: flex;
         align-items: center;
-        padding:10px;
         transition: all 0.3s ease; /* 부드러운 확장을 위한 전환 효과 */
     }
 
     .resource img {
-        width: 20%;
+        width: 17%;
         height: auto;
-        margin-right: 20px;
+        margin-right: 3%;
     }
 
     .resource .text {
@@ -293,12 +273,12 @@
 
     .resource p {
         margin: 5px 0;
-        font-size: 40px;
+        font-size: 4vw;
         color: #333;
     }
 
     .resource .description {
-        font-size: 35px;
+        font-size: 3vw;
         color: #666;
     }
 
@@ -326,27 +306,25 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        font-size: 12px;
+        font-size: 5vw;
         color: #333;
         cursor: pointer;
         text-decoration: none;
     }
 
     .navbar a i {
-        font-size: 40px;
+        font-size: 4vw;
         margin-bottom: 20%;
     }
 
     .navbar a span {
         display: block;
-        font-size: 30px;
+        font-size: 3vw;
     }
 
     .navbar a:hover {
         color: #007bff;
     }
-
-
 </style>
 </body>
 </html>

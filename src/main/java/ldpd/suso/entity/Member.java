@@ -1,12 +1,16 @@
 package ldpd.suso.entity;
 
 import jakarta.persistence.*;
-import ldpd.suso.security.MemberRole;
+import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Data
 public class Member {
@@ -22,6 +26,7 @@ public class Member {
     private String name;
 
     private String email;
+
     @CreationTimestamp
     private Timestamp createdAt;
 
