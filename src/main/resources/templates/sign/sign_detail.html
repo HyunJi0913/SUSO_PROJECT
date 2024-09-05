@@ -20,49 +20,49 @@
         font-style: normal;
     }
 
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        background-color: #EEEEEE; /* 배경색을 회색으로 설정 */
+   body {
+            background-color: #EEEEEE; /* 배경색을 회색으로 설정 */
+            font-family: 'HakgyoansimBareondotumB', sans-serif;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-x: hidden; /* 가로 스크롤 방지 */
     }
 
-    body {
-        font-family: 'HakgyoansimBareondotumB', sans-serif;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        overflow-x: hidden; /* 가로 스크롤 방지 */
-        overflow-y: auto; /* 세로 스크롤 가능 */
-    }
-    .layout {
-      width: 100%;
-    }
-    .header {
-        width: 100%;
-        z-index: 1000;
-        text-align: center;
-        position: sticky;
-        top: 0;
-    }
+  .layout {
+            flex: 1; /* 레이아웃이 남은 공간을 차지하도록 설정 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto; /* 세로 스크롤 가능 */
+            padding-bottom: 20%; /* navbar가 겹치지 않도록 하단에 여백 추가 */
+  }
 
-    .header p {
-        display: inline;
-        font-size: 8vw;
-        color: #81D4FA;
-    }
+  .header {
+            width: 100%;
+            padding: 10px 0;
+            z-index: 1000;
+            text-align: center;
+        }
 
-    .fixed-title {
-        font-family: 'BMJUA', sans-serif;
-        color: black;
-        text-align: center;
-        padding: 5% 0;
-        font-size: 8vw;
-    }
+        .header p {
+            display: inline;
+            font-size: 7vw;
+            color: #81D4FA;
+        }
 
+        .fixed-title {
+            font-family: 'BMJUA', sans-serif;
+            color: black;
+            text-align: center;
+            padding: 5% 0;
+            font-size: 7vw;
+        }
 
     .title {
-      font-size: 60px;
+      font-size: 6vw;
       padding-left: 5%;
       text-align: left; /* 텍스트를 왼쪽 정렬 */
       width: 100%; /* 전체 너비를 사용 */
@@ -83,27 +83,23 @@
 }
 
 video {
-margin-left:4%;
-  width: 100%; /* 비디오가 부모의 전체 너비를 차지 */
+  width: 95%; /* 비디오가 부모의 전체 너비를 차지 */
   height: auto; /* 비율에 맞춰 높이를 자동 조절 */
 }
-
-
-
-
     .info {
       width: 100%;
       border-radius: 10px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      margin-top: 20px;
+      margin-top: 5%;
       padding: 20px;
     }
 
     .info-section {
-      width: 90%;
+      width: 85%;
       background-color: #fff;
       padding: 1% 5%;
       margin-bottom: 5%;
+      margin: 0 auto;
     }
 
     .info-section:last-child {
@@ -186,7 +182,7 @@ margin-left:4%;
       <h2 class="info-title">표제어 설명</h2>
       <hr>
       <p class="info-content" th:text="'품사 | ' + ${sign.pum_desc}"></p>
-      <p class="info-content" th:text="${sign.sign_desc}"></p>
+      <p class="info-content" th:text="'설명 | ' +${sign.sign_desc}"></p>
     </div>
   </div>
 

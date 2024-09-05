@@ -168,24 +168,40 @@
         padding: 0;
     }
 
-    body {
-        font-family: 'BMJUA', sans-serif;
-        background-image: url('/image/main.png'); /* Add this line */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover; /* Ensures the background covers the entire body */
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        margin: 0;
+<!--    body {-->
+<!--        font-family: 'BMJUA', sans-serif;-->
+<!--        background-image: url('/image/main.png'); /* Add this line */-->
+<!--        background-position: center;-->
+<!--        background-repeat: no-repeat;-->
+<!--        background-size: cover; /* Ensures the background covers the entire body */-->
+<!--        justify-content: center;-->
+<!--        align-items: center;-->
+<!--        display: flex;-->
+<!--        margin: 0;-->
+<!--    }-->
+
+     body {
+            background-image: url('/image/main.png'); /* Add this line */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: 'HakgyoansimBareondotumB', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-x: hidden; /* 가로 스크롤 방지 */
+            overflow-y: auto; /* 세로 스크롤 가능 */
     }
 
     .main {
+
         max-width: 90%;
         text-align: center;
         min-height: 100%;
         padding-top: 5%; /* 헤더 높이에 따라 조정 가능 */
-        padding-bottom: 15%; /* navbar와의 간격을 위해 하단 패딩 추가 */
     }
 
     .fixed-title {
@@ -249,16 +265,21 @@
 
 
     .resource {
-        margin-bottom: 7%;
-        background-color: #fff;
-        border-radius: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        width: 100%;
-        text-align: left;
-        display: flex;
-        align-items: center;
-        transition: all 0.3s ease; /* 부드러운 확장을 위한 전환 효과 */
-    }
+    margin-bottom: 7%;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease; /* 부드러운 확장을 위한 전환 효과 */
+}
+
+.resource:last-of-type {
+    margin-bottom: 25%; /* 마지막 수어 퀴즈 버튼에 margin-bottom 추가 */
+}
+
 
     .resource img {
         width: 17%;

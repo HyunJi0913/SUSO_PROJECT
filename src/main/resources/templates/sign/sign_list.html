@@ -275,6 +275,7 @@
       <input type="text" id="searchKeyword" name="searchKeyword">
       <button type="submit">검색</button>
     </form>
+
   </div>
 
 
@@ -308,13 +309,14 @@
   });
 
   function validateSearch() {
-      const searchKeyword = document.getElementById('searchKeyword').value.trim();
-      if (searchKeyword === "") {
-          alert("검색어를 입력해주세요");
-          return false; // 폼 제출 방지
-      }
-      return true; // 폼 제출 허용
-  }
+    const searchKeyword = document.getElementById('searchKeyword').value.trim();
+    if (searchKeyword === "") {
+        alert("검색어를 입력해주세요"); // 이 부분에서 문제가 없는지 확인
+        return false; // 폼 제출 방지
+    }
+    return true; // 폼 제출 허용
+}
+
 </script>
 
 </html>
